@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace WinFormsApp1
 {
@@ -21,11 +21,11 @@ namespace WinFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             var Tokens = new[] {
-                ("KEYWORD", @"^(if|else|for|int|float|double|while|do|return)"),
-                ("ID", @"^[A-Za-z_](\w)*$"),
-                ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"),
-                ("DELIMITER", @"[();{}\[\]]"),
-                ("OP", @"(\+|/|-|\*|=|<|>|<=|>=|\||&|\^)")
+            ("KEYWORD", @"^(اذا|اخر|من|صحيح|عائم|مزدوج|طالما|افعل|ارجع|صح|خطأ)$"), 
+            ("ID", @"^[\u0600-\u06FF_](\w)*$"), 
+            ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"), 
+            ("DELIMITER", @"[();{}\[\]]"), 
+            ("OP", @"(\+|/|-|\*|=|<|>|<=|>=|\||&|\^)") 
             };
             var input = txt1.Text;
             input = Regex.Replace(input, $@"{Tokens[3].Item2}", match => $" {match.Value} ");
