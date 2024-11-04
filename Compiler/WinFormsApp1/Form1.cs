@@ -21,7 +21,7 @@ namespace WinFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             var Tokens = new[] {
-                ("KEYWORD", @"^(if|else|for|int|float|double|while|do|return)"),
+                ("KEYWORD", @"^(if|else|for|int|float|double|while|do|return)$"),
                 ("ID", @"^[A-Za-z_](\w)*$"),
                 ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"),
                 ("DELIMITER", @"[();{}\[\]]"),
