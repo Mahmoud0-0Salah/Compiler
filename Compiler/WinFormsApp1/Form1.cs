@@ -21,14 +21,25 @@ namespace WinFormsApp1
         private void button1_Click(object sender, EventArgs e)
         {
             var Tokens = new[] {
-            ("KEYWORD", @"^(اذا|اخر|من|صحيح|عائم|مزدوج|طالما|افعل|ارجع|صح|خطأ)$"), 
+            ("BOOLEAN", @"^(صح|خطأ)$"),
+            ("LOOP", @"^(من|الي|طالما|افعل)$"),
+            ("DATATYPE", @"^(صحيح|عائم|مزدوج|كلمة)$"),
+            ("else_stmt", @"^(اخر)$"),
+            ("if_stmt", @"^(اذا)$"),
+            ("return", @"^(ارجع)$"),
             ("ID", @"^[\u0600-\u06FF_](\w)*$"), 
             ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"), 
-            ("DELIMITER", @"[();{}\[\]]"), 
-            ("OP", @"(\+|/|-|\*|=|<|>|<=|>=|\||&|\^)") 
+            ("SEMICOLON", @";"), 
+            ("PARENTHESES", @"[()]"),
+            ("CURLY", @"[{}]"),
+            ("SQUARE", @"[\[\]]"),
+            ("BITSOP", @"(\||&)"),
+            ("ASSIGNOP", @"^(=)"),
+            ("MATHOP", @"(\+|/|-|\*|\^)"), 
+            ("COMPARISONOP", @"(<|>|<=|>=|==|\!=)") 
             };
             var input = txt1.Text;
-            input = Regex.Replace(input, $@"{Tokens[3].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{Tokens[8].Item2}", match => $" {match.Value} ");
             string[] result = Regex.Split(input, @"\s+");
 
             txt2.Clear();  
