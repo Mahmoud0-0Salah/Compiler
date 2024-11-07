@@ -82,7 +82,29 @@ namespace WinFormsApp1
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            TokenizeInput(txt1.Text);
+            txt2.Clear();
+            var parser = new Parser(tokens);
+            var (errors, rulesCalled) = parser.Parse();
+            txt2.AppendText(Environment.NewLine + "Parser Output:" + Environment.NewLine);
+            if (errors.Count > 0)
+            {
+                txt2.AppendText("Errors:" + Environment.NewLine);
+                foreach (var error in errors)
+                {
+                    txt2.AppendText(error + Environment.NewLine);
+                }
+            }
+            else
+            {
+                txt2.AppendText("Parsing successful! Rules called:" + Environment.NewLine);
+                foreach (var rule in rulesCalled)
+                {
+                    txt2.AppendText(rule + Environment.NewLine);
+                }
+            }
         }
+
+   
     }
 }
