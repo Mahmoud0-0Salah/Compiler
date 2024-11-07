@@ -93,51 +93,66 @@ namespace WinFormsApp1
 
         private void Declaration()
         {
-            if (currentToken.IsToken("KEYWORD"))
+            if (currentToken.IsToken("DATATYPE"))
             {
-                Match("KEYWORD");
+                Match("DATATYPE");
                 Match("ID");
-                if (currentToken.IsToken("("))
+                if (currentToken.IsToken("PARENTHESES"))
                 {
                     FunDeclaration();
                 }
-                else
+                else if (currentToken.IsToken("ASSIGNOP"))
                 {
                     VarDeclaration();
+                }
+                else
+                {
+                    errors.Add($"Uncompleted line");
+                    Consume();
                 }
             }
             else
             {
-                errors.Add($"Error: Expected keyword but found {currentToken.Value}");
+                errors.Add($"Uncompleted line");
                 Consume();
             }
         }
 
         private void VarDeclaration()
         {
-            if (currentToken.IsToken("="))
+            if (currentToken.IsToken("ASSIGNOP"))
             {
-                Match("=");
+                Match("ASSIGNOP");
                 Match("NUM");
             }
-            else if (currentToken.IsToken("["))
+            else if (currentToken.IsToken("SQUARE"))
             {
-                Match("[");
+                Match("SQUARE");
                 Match("NUM");
-                Match("]");
+                Match("SQUARE");
             }
-            Match("DELIMITER");
+            Match("SEMICOLON");
         }
 
         private void FunDeclaration()
         {
-            Match("(");
+            Match("PARENTHESES");
             Params();
-            Match(")");
-            CompoundStmt();
+            Match("PARENTHESES");
+            Match("COLON");
         }
 
-        private void Params() { /* Implementation for parsing function parameters */ }
-        private void CompoundStmt() { /* Implementation for parsing compound statements */ }
+        private void Params() {
+
+            while (true)
+            {
+                Match("DATATYPE");
+                Match("ID");
+                if (currentToken.IsToken("PARENTHESES"))
+                    break;
+                else
+                    Match("COMMA");
+            }
+        }
     }
 }

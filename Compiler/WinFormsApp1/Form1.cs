@@ -32,12 +32,13 @@ namespace WinFormsApp1
             ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"),
             ("SEMICOLON", @";"),
             ("PARENTHESES", @"[()]"),
-            ("CURLY", @"[{}]"),
+            ("COLON", @":"),
             ("SQUARE", @"[\[\]]"),
             ("BITSOP", @"(\||&)"),
             ("ASSIGNOP", @"^(=)"),
             ("MATHOP", @"(\+|/|-|\*|\^)"),
-            ("COMPARISONOP", @"(<|>|<=|>=|==|\!=)")
+            ("COMPARISONOP", @"(<|>|<=|>=|==|\!=)"),
+            ("COMMA", @"(,)")
             };
 
             var input = Regex.Replace(inputText, $@"{TokensDefinitions[3].Item2}", match => $" {match.Value} ");
