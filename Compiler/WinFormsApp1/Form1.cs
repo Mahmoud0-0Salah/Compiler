@@ -4,6 +4,8 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
+        private List<Token> tokens;
+
         public Form1()
         {
             InitializeComponent();
@@ -17,43 +19,50 @@ namespace WinFormsApp1
 
             this.Controls.Add(titleLabel);
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void TokenizeInput(string inputText)
         {
-            var Tokens = new[] {
+            var TokensDefinitions = new[] {
             ("BOOLEAN", @"^(صح|خطأ)$"),
             ("LOOP", @"^(من|الي|طالما|افعل)$"),
             ("DATATYPE", @"^(صحيح|عائم|مزدوج|كلمة)$"),
             ("else_stmt", @"^(اخر)$"),
             ("if_stmt", @"^(اذا)$"),
             ("return", @"^(ارجع)$"),
-            ("ID", @"^[\u0600-\u06FF_](\w)*$"), 
-            ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"), 
-            ("SEMICOLON", @";"), 
+            ("ID", @"^[\u0600-\u06FF_](\w)*$"),
+            ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"),
+            ("SEMICOLON", @";"),
             ("PARENTHESES", @"[()]"),
             ("CURLY", @"[{}]"),
             ("SQUARE", @"[\[\]]"),
             ("BITSOP", @"(\||&)"),
             ("ASSIGNOP", @"^(=)"),
-            ("MATHOP", @"(\+|/|-|\*|\^)"), 
-            ("COMPARISONOP", @"(<|>|<=|>=|==|\!=)") 
+            ("MATHOP", @"(\+|/|-|\*|\^)"),
+            ("COMPARISONOP", @"(<|>|<=|>=|==|\!=)")
             };
-            var input = txt1.Text;
-            input = Regex.Replace(input, $@"{Tokens[8].Item2}", match => $" {match.Value} ");
+
+            var input = Regex.Replace(inputText, $@"{TokensDefinitions[3].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[5].Item2}", match => $" {match.Value} ");
             string[] result = Regex.Split(input, @"\s+");
 
-            txt2.Clear();  
+            tokens = new List<Token>();
+            txt2.Clear();
+
             foreach (string s in result)
             {
-                foreach (var token in Tokens)
+                foreach (var tokenDef in TokensDefinitions)
                 {
-                    if (Regex.IsMatch(s, token.Item2))
+                    if (Regex.IsMatch(s, tokenDef.Item2))
                     {
-                        txt2.AppendText($"{s} => {token.Item1}{Environment.NewLine}");
+                        tokens.Add(new Token { Type = tokenDef.Item1, Value = s });
+                        txt2.AppendText($"{s} => {tokenDef.Item1}{Environment.NewLine}");
                         break;
                     }
                 }
             }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TokenizeInput(txt1.Text);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
