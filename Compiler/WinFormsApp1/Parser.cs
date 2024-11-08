@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace WinFormsApp1
@@ -84,6 +85,17 @@ namespace WinFormsApp1
             {
                 if (currentToken.IsToken("DATATYPE"))
                      TrackFunction(Declaration, nameof(Declaration));
+                else if (currentToken.IsToken("LOOP"))
+                    TrackFunction(Loop, nameof(Loop));
+                else if (currentToken.IsToken("if_stmt") || currentToken.IsToken("else_stmt"))
+                    TrackFunction(ConditionStmt, nameof(ConditionStmt));
+                else if (currentToken.IsToken("return"))
+                    TrackFunction(Func_Return, nameof(Func_Return));
+                else if (currentToken.IsToken("ID"))
+                    TrackFunction(Assign, nameof(Assign));
+                else if (currentToken.IsToken("PRINT"))
+                    TrackFunction(Print, nameof(Print));
+
                 else
                 {
                     errors.Add($"Unexpected error");
@@ -102,14 +114,9 @@ namespace WinFormsApp1
                 {
                     FunDeclaration();
                 }
-                else if (currentToken.IsToken("ASSIGNOP"))
+                else 
                 {
                     VarDeclaration();
-                }
-                else
-                {
-                    errors.Add($"Unexpected error");
-                    Consume();
                 }
             }
             else
@@ -117,6 +124,77 @@ namespace WinFormsApp1
                 errors.Add($"Unexpected error");
                 Consume();
             }
+        }
+
+        private void Loop()
+        {
+            Match("LOOP");
+            Match("PARENTHESES");
+            Range();
+            Match("PARENTHESES");
+            Match("COLON");
+        }
+
+        private void ConditionStmt()
+        {
+            if (currentToken.IsToken("if_stmt"))
+            {
+                Match("if_stmt");
+                Match("PARENTHESES");
+                Condition();
+                Match("PARENTHESES");
+            }
+            else
+                Match("else_stmt");
+            Match("COLON");
+        }
+
+        private void Func_Return()
+        {
+           Match("return");
+           Exp();
+           Match("SEMICOLON");
+        }
+        private void Assign()
+        {
+            Match("ID");
+            Match("ASSIGNOP");
+            if (currentToken.IsToken("NUM"))
+                Match("NUM");
+            else
+                AssignToVar();
+            Match("SEMICOLON");
+        }
+        private void Print()
+        {
+            Match("PRINT");
+            Match("PARENTHESES");
+            Match("ID");
+            Match("PARENTHESES");
+            Match("SEMICOLON");
+        }
+        private void Range()
+        {
+            Exp();
+            Match("RANGE");
+            Exp();
+        }
+
+        private void Condition()
+        {
+            Exp();
+            Match("COMPARISONOP");
+            Exp();
+        }
+
+        private void AssignToVar()
+        {
+            Match("ID");
+            if (currentToken.IsToken("SEMICOLON"))
+                return;
+            Match("PARENTHESES");
+            Params();
+            Match("PARENTHESES");
         }
 
         private void VarDeclaration()
@@ -167,6 +245,8 @@ namespace WinFormsApp1
 
                 if (currentToken.IsToken("MATHOP"))
                     Match("MATHOP");
+                else if (currentToken.IsToken("BITSOP"))
+                    Match("BITSOP");
                 else
                     break;
             }

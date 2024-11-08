@@ -23,7 +23,9 @@ namespace WinFormsApp1
         {
             var TokensDefinitions = new[] {
             ("BOOLEAN", @"^(صح|خطأ)$"),
-            ("LOOP", @"^(من|الي|طالما|افعل)$"),
+            ("LOOP", @"^(من)$"),
+            ("RANGE", @"^(الي)$"),
+            ("PRINT", @"^(اطبع)$"),
             ("DATATYPE", @"^(صحيح|عائم|مزدوج|كلمة)$"),
             ("else_stmt", @"^(اخر)$"),
             ("if_stmt", @"^(اذا)$"),
@@ -35,16 +37,16 @@ namespace WinFormsApp1
             ("COLON", @":"),
             ("SQUARE", @"[\[\]]"),
             ("BITSOP", @"(\||&)"),
-            ("ASSIGNOP", @"^(=)"),
-            ("MATHOP", @"(\+|/|-|\*|\^)"),
             ("COMPARISONOP", @"(<|>|<=|>=|==|\!=)"),
+            ("ASSIGNOP", @"^(=)"),
+            ("MATHOP", @"(\+|/|-|\*|\^|%)"),
             ("COMMA", @"(,)")
             };
 
-            var input = Regex.Replace(inputText, $@"{TokensDefinitions[8].Item2}", match => $" {match.Value} ");
-            input = Regex.Replace(input, $@"{TokensDefinitions[9].Item2}", match => $" {match.Value} ");
+            var input = Regex.Replace(inputText, $@"{TokensDefinitions[9].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[10].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[11].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[12].Item2}", match => $" {match.Value} ");
             string[] result = Regex.Split(input, @"\s+");
 
             tokens = new List<Token>();
@@ -89,7 +91,7 @@ namespace WinFormsApp1
             txt2.Clear();
             var parser = new Parser(tokens);
             var (errors, rulesCalled) = parser.Parse();
-            txt2.AppendText(Environment.NewLine + "Parser Output:" + Environment.NewLine);
+            txt2.AppendText("Parser Output:" + Environment.NewLine);
             if (errors.Count > 0)
             {
                 txt2.AppendText("Errors:" + Environment.NewLine);
