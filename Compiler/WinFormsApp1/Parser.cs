@@ -80,14 +80,15 @@ namespace WinFormsApp1
 
         private void Program()
         {
-            TrackFunction(DeclarationList, nameof(Program));
-        }
-
-        private void DeclarationList()
-        {
             while (!currentToken.IsToken("EOF"))
             {
-                Declaration();
+                if (currentToken.IsToken("DATATYPE"))
+                     TrackFunction(Declaration, nameof(Declaration));
+                else
+                {
+                    errors.Add($"Unexpected error");
+                    Consume();
+                }
             }
         }
 
@@ -107,13 +108,13 @@ namespace WinFormsApp1
                 }
                 else
                 {
-                    errors.Add($"Uncompleted line");
+                    errors.Add($"Unexpected error");
                     Consume();
                 }
             }
             else
             {
-                errors.Add($"Uncompleted line");
+                errors.Add($"Unexpected error");
                 Consume();
             }
         }
@@ -123,7 +124,7 @@ namespace WinFormsApp1
             if (currentToken.IsToken("ASSIGNOP"))
             {
                 Match("ASSIGNOP");
-                Match("NUM");
+                Exp();
             }
             else if (currentToken.IsToken("SQUARE"))
             {
@@ -154,5 +155,23 @@ namespace WinFormsApp1
                     Match("COMMA");
             }
         }
+        private void Exp()
+        {
+
+            while (true)
+            {
+                if (currentToken.IsToken("ID"))
+                    Match("ID");
+                else
+                    Match("NUM");
+
+                if (currentToken.IsToken("MATHOP"))
+                    Match("MATHOP");
+                else
+                    break;
+            }
+        }
+
+
     }
 }

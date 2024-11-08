@@ -41,8 +41,10 @@ namespace WinFormsApp1
             ("COMMA", @"(,)")
             };
 
-            var input = Regex.Replace(inputText, $@"{TokensDefinitions[3].Item2}", match => $" {match.Value} ");
-            input = Regex.Replace(input, $@"{TokensDefinitions[5].Item2}", match => $" {match.Value} ");
+            var input = Regex.Replace(inputText, $@"{TokensDefinitions[8].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[9].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[10].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[11].Item2}", match => $" {match.Value} ");
             string[] result = Regex.Split(input, @"\s+");
 
             tokens = new List<Token>();
