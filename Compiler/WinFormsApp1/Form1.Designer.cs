@@ -64,11 +64,11 @@
             // 
             txt1.BackColor = Color.FromArgb(223, 242, 235);
             txt1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txt1.Location = new Point(1, 130);
+            txt1.Location = new Point(-1, 76);
             txt1.Multiline = true;
             txt1.Name = "txt1";
             txt1.ScrollBars = ScrollBars.Both;
-            txt1.Size = new Size(1265, 391);
+            txt1.Size = new Size(708, 701);
             txt1.TabIndex = 2;
             txt1.TextChanged += textBox1_TextChanged;
             // 
@@ -76,11 +76,11 @@
             // 
             txt2.BackColor = Color.FromArgb(223, 242, 235);
             txt2.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txt2.Location = new Point(1, 527);
+            txt2.Location = new Point(713, 76);
             txt2.Multiline = true;
             txt2.Name = "txt2";
             txt2.ScrollBars = ScrollBars.Both;
-            txt2.Size = new Size(1265, 250);
+            txt2.Size = new Size(553, 701);
             txt2.TabIndex = 3;
             txt2.TextChanged += textBox2_TextChanged;
             // 
