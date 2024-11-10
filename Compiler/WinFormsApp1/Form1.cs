@@ -32,8 +32,9 @@ namespace WinFormsApp1
             ("return", @"^(ارجع)$"),
             ("ID", @"^[\u0600-\u06FF_](\w)*$"),
             ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"),
-            ("SEMICOLON", @";"),
+            ("SEMICOLON", @";"), //10
             ("PARENTHESES", @"[()]"),
+            ("CURLY", @"[{}]"),
             ("COLON", @":"),
             ("SQUARE", @"[\[\]]"),
             ("BITSOP", @"(\||&)"),
@@ -43,8 +44,7 @@ namespace WinFormsApp1
             ("COMMA", @"(,)")
             };
 
-            var input = Regex.Replace(inputText, $@"{TokensDefinitions[9].Item2}", match => $" {match.Value} ");
-            input = Regex.Replace(input, $@"{TokensDefinitions[10].Item2}", match => $" {match.Value} ");
+            var input = Regex.Replace(inputText, $@"{TokensDefinitions[10].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[11].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[12].Item2}", match => $" {match.Value} ");
             string[] result = Regex.Split(input, @"\s+");
