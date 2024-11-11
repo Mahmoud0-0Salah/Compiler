@@ -33,10 +33,12 @@ namespace WinFormsApp1
             ("ID", @"^[\u0600-\u06FF_](\w)*$"),
             ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"),
             ("SEMICOLON", @";"), //10
-            ("PARENTHESES", @"[()]"),
-            ("CURLY", @"[{}]"),
-            ("COLON", @":"),
-            ("SQUARE", @"[\[\]]"),
+            ("(", @"\("),
+            (")", @"\)"),
+            ("{", @"{"),
+            ("}", @"}"),
+            ("[", @"\["),
+            ("]", @"\]"),
             ("BITSOP", @"(\||&)"),
             ("COMPARISONOP", @"(<|>|<=|>=|==|\!=)"),
             ("ASSIGNOP", @"^(=)"),
@@ -47,6 +49,10 @@ namespace WinFormsApp1
             var input = Regex.Replace(inputText, $@"{TokensDefinitions[10].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[11].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[12].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[13].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[14].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[15].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[16].Item2}", match => $" {match.Value} ");
             string[] result = Regex.Split(input, @"\s+");
 
             tokens = new List<Token>();

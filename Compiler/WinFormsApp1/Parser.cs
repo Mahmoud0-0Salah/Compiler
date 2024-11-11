@@ -79,12 +79,12 @@ namespace WinFormsApp1
             return (errors, rulesCalled);
         }
 
-        private void Program()
+        private void Program(bool IsScope = false)
         {
             while (!currentToken.IsToken("EOF"))
             {
                 if (currentToken.IsToken("DATATYPE"))
-                     TrackFunction(Declaration, nameof(Declaration));
+                    TrackFunction(Declaration, nameof(Declaration));
                 else if (currentToken.IsToken("LOOP"))
                     TrackFunction(Loop, nameof(Loop));
                 else if (currentToken.IsToken("if_stmt") || currentToken.IsToken("else_stmt"))
@@ -95,10 +95,11 @@ namespace WinFormsApp1
                     TrackFunction(Assign, nameof(Assign));
                 else if (currentToken.IsToken("PRINT"))
                     TrackFunction(Print, nameof(Print));
+                else if (IsScope)
+                    return;
 
                 else
                 {
-                    errors.Add($"Unexpected error");
                     Consume();
                 }
             }
@@ -110,7 +111,7 @@ namespace WinFormsApp1
             {
                 Match("DATATYPE");
                 Match("ID");
-                if (currentToken.IsToken("PARENTHESES"))
+                if (currentToken.IsToken("("))
                 {
                     FunDeclaration();
                 }
@@ -121,7 +122,6 @@ namespace WinFormsApp1
             }
             else
             {
-                errors.Add($"Unexpected error");
                 Consume();
             }
         }
@@ -129,10 +129,12 @@ namespace WinFormsApp1
         private void Loop()
         {
             Match("LOOP");
-            Match("PARENTHESES");
+            Match("(");
             Range();
-            Match("PARENTHESES");
-            Match("COLON");
+            Match(")");
+            Match("{");
+            Program(true);
+            Match("}");
         }
 
         private void ConditionStmt()
@@ -140,13 +142,16 @@ namespace WinFormsApp1
             if (currentToken.IsToken("if_stmt"))
             {
                 Match("if_stmt");
-                Match("PARENTHESES");
+                Match("(");
                 Condition();
-                Match("PARENTHESES");
+                Match(")");
+
             }
             else
                 Match("else_stmt");
-            Match("COLON");
+            Match("{");
+            Program(true);
+            Match("}");
         }
 
         private void Func_Return()
@@ -168,9 +173,9 @@ namespace WinFormsApp1
         private void Print()
         {
             Match("PRINT");
-            Match("PARENTHESES");
+            Match("(");
             Match("ID");
-            Match("PARENTHESES");
+            Match(")");
             Match("SEMICOLON");
         }
         private void Range()
@@ -189,12 +194,12 @@ namespace WinFormsApp1
 
         private void AssignToVar()
         {
-            Match("ID");
+            Exp();
             if (currentToken.IsToken("SEMICOLON"))
                 return;
-            Match("PARENTHESES");
-            Params();
-            Match("PARENTHESES");
+            Match("(");
+            Params(true);
+            Match(")");
         }
 
         private void VarDeclaration()
@@ -203,34 +208,61 @@ namespace WinFormsApp1
             {
                 Match("ASSIGNOP");
                 Exp();
+                if (currentToken.IsToken("SEMICOLON"))
+                {
+                    Match("SEMICOLON");
+                    return;
+                }
+                Match("(");
+                Params(true);
+                Match(")");
             }
-            else if (currentToken.IsToken("SQUARE"))
+            else if (currentToken.IsToken("["))
             {
-                Match("SQUARE");
+                Match("[");
                 Match("NUM");
-                Match("SQUARE");
+                Match("]");
             }
             Match("SEMICOLON");
         }
 
         private void FunDeclaration()
         {
-            Match("PARENTHESES");
+            Match("(");
             Params();
-            Match("PARENTHESES");
-            Match("COLON");
+            Match(")");
+            Match("{");
+            Program(true);
+            Match("}");
         }
 
-        private void Params() {
+        private void Params(bool IsAssign = false) {
 
             while (true)
             {
-                Match("DATATYPE");
-                Match("ID");
-                if (currentToken.IsToken("PARENTHESES"))
-                    break;
+                if (!IsAssign)
+                {
+                    Match("DATATYPE");
+                    Match("ID");
+                }
+                
                 else
+                {
+                    if (currentToken.IsToken("ID"))
+                        Match("ID");
+                    else
+                        Match("NUM");
+
+                }
+                if (currentToken.IsToken(")"))
+                    break;
+                else if (currentToken.IsToken("COMMA"))
                     Match("COMMA");
+                else
+                {
+                    Match(")");
+                    break;
+                }
             }
         }
         private void Exp()
