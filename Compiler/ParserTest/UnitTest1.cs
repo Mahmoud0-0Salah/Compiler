@@ -10,7 +10,7 @@ namespace ParserTest
         [InlineData("صحيح  س = 2 ;\r\n\r\nكلمة س [ 33 ] ;","Parser Output:\r\nParsing successful! Rules called:\r\nDeclaration\r\nDeclaration\r\n")]
         [InlineData("صحيح دالة (صحيح س , عائم ص) \r\n{\r\n\r\n}", "Parser Output:\r\nParsing successful! Rules called:\r\nDeclaration\r\n")]
         [InlineData("من (س الي ص  + ض ) \r\n{\r\n\r\n}", "Parser Output:\r\nParsing successful! Rules called:\r\nLoop\r\n")]
-        [InlineData("اذا (س <= ص  + ض) \r\n{\r\n\r\n}", "Parser Output:\r\nParsing successful! Rules called:\r\nConditionStmt\r\n")]
+        [InlineData("اذا (س <= ص  + ض) \r\n{\r\n\r\n}\r\n\r\nاخر\r\n{\r\n\r\n\r\n}", "Parser Output:\r\nParsing successful! Rules called:\r\nConditionStmt\r\n")]
         [InlineData("س = ص  (  ض ) ;\r\n\r\n س = ص ;", "Parser Output:\r\nParsing successful! Rules called:\r\nAssign\r\nAssign\r\n")]
         [InlineData("اطبع (س) ;\r\n\r\nاطبع (١٢) ;", "Parser Output:\r\nParsing successful! Rules called:\r\nPrint\r\nPrint\r\n")]
         [InlineData("صحيح دالة (صحيح س) \r\n{\r\n  صحيح ص = 2 ;\r\n  من (ص الي س / 2 ) \r\n  {\r\n      اذا ( س % ص == 0 ) \r\n      {\r\n          ارجع 0 ;\r\n      }\r\n      ارجع 1 ;\r\n  }\r\n}  \r\n\r\nصحيح س = 13 ;\r\n\r\nصحيح اولي  = دالة ( س ) ;\r\n\r\n اولي  = دالة ( ١٢  ) ;\r\n\r\nاطبع (  اولي) ;"

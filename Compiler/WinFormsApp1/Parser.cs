@@ -87,7 +87,7 @@ namespace WinFormsApp1
                     TrackFunction(Declaration, nameof(Declaration));
                 else if (currentToken.IsToken("LOOP"))
                     TrackFunction(Loop, nameof(Loop));
-                else if (currentToken.IsToken("if_stmt") || currentToken.IsToken("else_stmt"))
+                else if (currentToken.IsToken("if_stmt"))
                     TrackFunction(ConditionStmt, nameof(ConditionStmt));
                 else if (currentToken.IsToken("return"))
                     TrackFunction(Func_Return, nameof(Func_Return));
@@ -100,6 +100,7 @@ namespace WinFormsApp1
 
                 else
                 {
+                    Error();
                     Consume();
                 }
             }
@@ -145,13 +146,18 @@ namespace WinFormsApp1
                 Match("(");
                 Condition();
                 Match(")");
-
+                Match("{");
+                Program(true);
+                Match("}");
             }
-            else
+
+            if (currentToken.IsToken("else_stmt"))
+            {
                 Match("else_stmt");
-            Match("{");
-            Program(true);
-            Match("}");
+                Match("{");
+                Program(true);
+                Match("}");
+            }
         }
 
         private void Func_Return()
