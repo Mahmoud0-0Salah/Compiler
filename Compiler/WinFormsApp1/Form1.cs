@@ -17,6 +17,8 @@ namespace WinFormsApp1
             titleLabel.TextAlign = ContentAlignment.MiddleCenter;
             titleLabel.Dock = DockStyle.Top;
             titleLabel.Height = 50;
+            titleLabel.ForeColor = Color.White; 
+
 
             this.Controls.Add(titleLabel);
         }

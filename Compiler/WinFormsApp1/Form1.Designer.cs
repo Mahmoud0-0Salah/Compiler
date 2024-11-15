@@ -36,10 +36,10 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.FromArgb(185, 229, 232);
-            button1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.Black;
-            button1.Location = new Point(1272, 130);
+            button1.BackColor = Color.FromArgb(71, 109, 124);
+            button1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(1272, 76);
             button1.Name = "button1";
             button1.Size = new Size(251, 94);
             button1.TabIndex = 0;
@@ -49,10 +49,10 @@
             // 
             // button2
             // 
-            button2.BackColor = Color.FromArgb(185, 229, 232);
-            button2.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.Black;
-            button2.Location = new Point(1272, 230);
+            button2.BackColor = Color.FromArgb(71, 109, 124);
+            button2.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(1272, 176);
             button2.Name = "button2";
             button2.Size = new Size(251, 94);
             button2.TabIndex = 1;
@@ -62,8 +62,9 @@
             // 
             // txt1
             // 
-            txt1.BackColor = Color.FromArgb(223, 242, 235);
-            txt1.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txt1.BackColor = Color.FromArgb(71, 109, 124);
+            txt1.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt1.ForeColor = Color.White;
             txt1.Location = new Point(-1, 76);
             txt1.Multiline = true;
             txt1.Name = "txt1";
@@ -74,8 +75,9 @@
             // 
             // txt2
             // 
-            txt2.BackColor = Color.FromArgb(223, 242, 235);
-            txt2.Font = new Font("Segoe UI", 16.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txt2.BackColor = Color.FromArgb(71, 109, 124);
+            txt2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txt2.ForeColor = Color.White;
             txt2.Location = new Point(713, 76);
             txt2.Multiline = true;
             txt2.Name = "txt2";
@@ -88,7 +90,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(122, 178, 211);
+            BackColor = Color.FromArgb(29, 62, 83);
             ClientSize = new Size(1525, 789);
             Controls.Add(txt2);
             Controls.Add(txt1);
