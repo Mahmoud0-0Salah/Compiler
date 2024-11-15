@@ -32,6 +32,7 @@
             button2 = new Button();
             txt1 = new TextBox();
             txt2 = new TextBox();
+            button3 = new Button();
             SuspendLayout();
             // 
             // button1
@@ -86,12 +87,27 @@
             txt2.TabIndex = 3;
             txt2.TextChanged += textBox2_TextChanged;
             // 
+            // button3
+            // 
+            button3.BackColor = Color.FromArgb(71, 109, 124);
+            button3.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            button3.ForeColor = Color.White;
+            button3.Location = new Point(-1, -2);
+            button3.Name = "button3";
+            button3.Size = new Size(185, 54);
+            button3.TabIndex = 4;
+            button3.Text = "Switch to Light Mode";
+            button3.TextAlign = ContentAlignment.BottomCenter;
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(29, 62, 83);
             ClientSize = new Size(1525, 789);
+            Controls.Add(button3);
             Controls.Add(txt2);
             Controls.Add(txt1);
             Controls.Add(button2);
@@ -109,5 +125,6 @@
         private Button button2;
         private TextBox txt1;
         private TextBox txt2;
+        private Button button3;
     }
 }

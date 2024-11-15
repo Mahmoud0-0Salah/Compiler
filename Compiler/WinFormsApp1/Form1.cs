@@ -7,6 +7,8 @@ namespace WinFormsApp1
         private List<Token> tokens;
         public TextBox Txt1 => txt1;
         public TextBox Txt2 => txt2;
+
+        private bool isDarkMode = true;
         public Form1()
         {
             InitializeComponent();
@@ -17,7 +19,7 @@ namespace WinFormsApp1
             titleLabel.TextAlign = ContentAlignment.MiddleCenter;
             titleLabel.Dock = DockStyle.Top;
             titleLabel.Height = 50;
-            titleLabel.ForeColor = Color.White; 
+            titleLabel.ForeColor = Color.White;
 
 
             this.Controls.Add(titleLabel);
@@ -119,6 +121,60 @@ namespace WinFormsApp1
             }
         }
 
-   
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (isDarkMode)
+            {
+                this.BackColor = System.Drawing.Color.FromArgb(122, 178, 211);
+                this.ForeColor = System.Drawing.Color.Black;
+
+                foreach (Control control in this.Controls)
+                {
+                    if (control is Button button)
+                    {
+                        button.BackColor = System.Drawing.Color.FromArgb(185, 229, 232);
+                        button.ForeColor = System.Drawing.Color.Black;
+                    }
+                    else if (control is TextBox textBox)
+                    {
+                        textBox.BackColor = System.Drawing.Color.FromArgb(223, 242, 235);
+                        textBox.ForeColor = System.Drawing.Color.Black;
+                    }
+                    else if (control is Label label)
+                    {
+                        label.ForeColor = System.Drawing.Color.Black;
+                    }
+                }
+
+                button3.Text = "Switch to Dark Mode";
+                isDarkMode = false; 
+            }
+            else
+            {
+                this.BackColor = System.Drawing.Color.FromArgb(29, 62, 83);
+                this.ForeColor = System.Drawing.Color.White;
+
+                foreach (Control control in this.Controls)
+                {
+                    if (control is Button button)
+                    {
+                        button.BackColor = System.Drawing.Color.FromArgb(71, 109, 124);
+                        button.ForeColor = System.Drawing.Color.White;
+                    }
+                    else if ( control is TextBox textBox)
+                    {
+                        textBox.BackColor = System.Drawing.Color.FromArgb(71, 109, 124);
+                        textBox.ForeColor = System.Drawing.Color.White;
+                    }
+                    else if (control is Label label)
+                    {
+                        label.ForeColor = System.Drawing.Color.White;
+                    }
+                }
+
+                button3.Text = "Switch to Light  Mode";
+                isDarkMode = true; 
+            }
+        }
     }
 }
