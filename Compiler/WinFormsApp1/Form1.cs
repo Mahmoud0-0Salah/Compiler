@@ -35,6 +35,7 @@ namespace WinFormsApp1
             ("else_stmt", @"^(اخر)$"),
             ("if_stmt", @"^(اذا)$"),
             ("return", @"^(ارجع)$"),
+            ("IN", @"في"),
             ("ID", @"^[\u0600-\u06FF_](\w)*$"),
             ("NUM", @"^(-|\+)?(\d+)(\.(\d+))?([eE][-\+]?\d+)?$"),
             ("SEMICOLON", @";"), //10
@@ -51,7 +52,7 @@ namespace WinFormsApp1
             ("COMMA", @"(,)")
             };
 
-            var input = Regex.Replace(inputText, $@"{TokensDefinitions[10].Item2}", match => $" {match.Value} ");
+            var input = Regex.Replace(inputText, $@"{TokensDefinitions[17].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[11].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[12].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[13].Item2}", match => $" {match.Value} ");

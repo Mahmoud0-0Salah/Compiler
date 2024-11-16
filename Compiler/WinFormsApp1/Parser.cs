@@ -131,8 +131,17 @@ namespace WinFormsApp1
         {
             Match("LOOP");
             Match("(");
+
+            Match("DATATYPE");
+            Match("ID");
+            Match("IN");
+
+            Match("(");
             Range();
             Match(")");
+            
+            Match(")");
+            
             Match("{");
             Program(true);
             Match("}");
