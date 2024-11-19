@@ -222,15 +222,29 @@ namespace WinFormsApp1
             if (currentToken.IsToken("ASSIGNOP"))
             {
                 Match("ASSIGNOP");
-                Exp();
-                if (currentToken.IsToken("SEMICOLON"))
+                if (currentToken.IsToken("NUM"))
+                    Exp();
+                else 
                 {
-                    Match("SEMICOLON");
-                    return;
+                    Match("ID");
+                    if (currentToken.IsToken("MATHOP"))
+                    {
+                        Match("MATHOP");
+                        Exp();
+                    }
+                    if (currentToken.IsToken("BITSOP"))
+                    {
+                        Match("BITSOP");
+                        Exp();
+                    }
+                    else
+                    {
+                        Match("(");
+                        Params(true);
+                        Match(")");
+                    }
                 }
-                Match("(");
-                Params(true);
-                Match(")");
+
             }
             else if (currentToken.IsToken("["))
             {
