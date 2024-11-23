@@ -179,10 +179,7 @@ namespace WinFormsApp1
         {
             Match("ID");
             Match("ASSIGNOP");
-            if (currentToken.IsToken("NUM"))
-                Match("NUM");
-            else
-                AssignToVar();
+            AssignToVar();
             Match("SEMICOLON");
         }
         private void Print()
@@ -209,12 +206,25 @@ namespace WinFormsApp1
 
         private void AssignToVar()
         {
-            Exp();
-            if (currentToken.IsToken("SEMICOLON"))
-                return;
-            Match("(");
-            Params(true);
-            Match(")");
+            // س = ص + س + س( ش ) + ش ;
+            while (true)
+            {
+                Exp();
+
+                if (currentToken.IsToken("SEMICOLON"))
+                    return;
+
+                Match("(");
+                Params(true);
+                Match(")");
+
+                if (currentToken.IsToken("MATHOP"))
+                    Match("MATHOP");
+                else if (currentToken.IsToken("BITSOP"))
+                    Match("BITSOP");
+                else
+                    return;
+            }
         }
 
         private void VarDeclaration()
@@ -222,28 +232,7 @@ namespace WinFormsApp1
             if (currentToken.IsToken("ASSIGNOP"))
             {
                 Match("ASSIGNOP");
-                if (currentToken.IsToken("NUM"))
-                    Exp();
-                else 
-                {
-                    Match("ID");
-                    if (currentToken.IsToken("MATHOP"))
-                    {
-                        Match("MATHOP");
-                        Exp();
-                    }
-                    if (currentToken.IsToken("BITSOP"))
-                    {
-                        Match("BITSOP");
-                        Exp();
-                    }
-                    else
-                    {
-                        Match("(");
-                        Params(true);
-                        Match(")");
-                    }
-                }
+                AssignToVar();
 
             }
             else if (currentToken.IsToken("["))
