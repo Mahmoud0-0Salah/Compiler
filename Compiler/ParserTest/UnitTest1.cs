@@ -13,7 +13,7 @@ namespace ParserTest
         [InlineData("اذا (س <= ص  + ض) \r\n{\r\n\r\n}\r\n\r\nاخر\r\n{\r\n\r\n\r\n}", "Parser Output:\r\nParsing successful! Rules called:\r\nConditionStmt\r\n")]
         [InlineData("س = ص  (  ض ) ;\r\n\r\n س = ص ;", "Parser Output:\r\nParsing successful! Rules called:\r\nAssign\r\nAssign\r\n")]
         [InlineData("اطبع (س) ;\r\n\r\nاطبع (١٢) ;", "Parser Output:\r\nParsing successful! Rules called:\r\nPrint\r\nPrint\r\n")]
-        [InlineData("صحيح دالة (صحيح س) \r\n{\r\n  من ( صحيح ص في ( ٢ الي س / 2 ) ) \r\n  {\r\n      اذا ( س % ص == 0 ) \r\n      {\r\n          ارجع 0 ;\r\n      }\r\n      ارجع 1 ;\r\n  }\r\n}  \r\n\r\nصحيح س = 13 ;\r\n\r\nصحيح اولي  = دالة ( س ) ;\r\n\r\n اولي  = دالة ( ١٢  ) ;\r\n\r\nاطبع (  اولي) ;\r\n"
+        [InlineData("// تعريف الدالة\r\n\r\nصحيح دالة (صحيح س) \r\n{\r\n  // لوب من 2 الي قيمة س\r\n\r\n  من ( صحيح ص في ( ٢ الي س / 2 ) ) \r\n  {\r\n      اذا ( س % ص == 0 ) \r\n      {\r\n        // ارجع صفر لو الرقم غير اولي\r\n\r\n          ارجع 0 ;\r\n      }\r\n\r\n      // ارجع واحد لو الرقم اولي\r\n\r\n      ارجع 1 ;\r\n  }\r\n}  \r\n\r\nصحيح س = 13 ;\r\n\r\nصحيح اولي  = دالة ( س ) ;\r\n\r\nاولي  = دالة ( ١٢  ) ;\r\n\r\n// نطبع القيمة الراجعة من الدالة\r\n\r\nاطبع (  اولي) ;\r\n"
             , "Parser Output:\r\nParsing successful! Rules called:\r\nDeclaration\r\nLoop\r\nConditionStmt\r\nFunc_Return\r\nFunc_Return\r\nDeclaration\r\nDeclaration\r\nAssign\r\nPrint\r\n")]
         public void Test1(string input,string exp)
         {

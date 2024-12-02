@@ -52,6 +52,8 @@ namespace WinFormsApp1
             ("COMMA", @"(,)")
             };
 
+            inputText = Regex.Replace(inputText, @"//.*$", string.Empty, RegexOptions.Multiline);
+            
             var input = Regex.Replace(inputText, $@"{TokensDefinitions[17].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[11].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[12].Item2}", match => $" {match.Value} ");
