@@ -129,6 +129,17 @@ namespace WinFormsApp1
 
         private void Loop()
         {
+            if (currentToken.Value == "طالما")
+            {
+                Match("LOOP");
+                Match("(");
+                Condition();
+                Match(")");
+                Match("{");
+                Program(true);
+                Match("}");
+                return;
+            }
             Match("LOOP");
             Match("(");
 
