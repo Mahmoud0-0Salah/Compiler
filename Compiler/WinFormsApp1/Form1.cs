@@ -24,7 +24,7 @@ namespace WinFormsApp1
 
             this.Controls.Add(titleLabel);
         }
-        private void TokenizeInput(string inputText)
+        private void TokenizeInput(string inputText,bool Scan = false)
         {
             var TokensDefinitions = new[] {
             ("BOOLEAN", @"^(صح|خطأ)$"),
@@ -53,7 +53,7 @@ namespace WinFormsApp1
             };
 
             inputText = Regex.Replace(inputText, @"//.*$", string.Empty, RegexOptions.Multiline);
-            
+
             var input = Regex.Replace(inputText, $@"{TokensDefinitions[17].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[11].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[12].Item2}", match => $" {match.Value} ");
@@ -64,7 +64,8 @@ namespace WinFormsApp1
             string[] result = Regex.Split(input, @"\s+");
 
             tokens = new List<Token>();
-            txt2.Clear();
+            if (Scan)
+                textBox1.Clear();
 
             foreach (string s in result)
             {
@@ -73,7 +74,8 @@ namespace WinFormsApp1
                     if (Regex.IsMatch(s, tokenDef.Item2))
                     {
                         tokens.Add(new Token { Type = tokenDef.Item1, Value = s });
-                        txt2.AppendText($"{s} => {tokenDef.Item1}{Environment.NewLine}");
+                        if (Scan)
+                            textBox1.AppendText($"{s} => {tokenDef.Item1}{Environment.NewLine}");
                         break;
                     }
                 }
@@ -81,7 +83,7 @@ namespace WinFormsApp1
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            TokenizeInput(txt1.Text);
+            TokenizeInput(txt1.Text,true);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -150,7 +152,7 @@ namespace WinFormsApp1
                 }
 
                 button3.Text = "Switch to Dark Mode";
-                isDarkMode = false; 
+                isDarkMode = false;
             }
             else
             {
@@ -164,7 +166,7 @@ namespace WinFormsApp1
                         button.BackColor = System.Drawing.Color.FromArgb(71, 109, 124);
                         button.ForeColor = System.Drawing.Color.White;
                     }
-                    else if ( control is TextBox textBox)
+                    else if (control is TextBox textBox)
                     {
                         textBox.BackColor = System.Drawing.Color.FromArgb(71, 109, 124);
                         textBox.ForeColor = System.Drawing.Color.White;
@@ -176,8 +178,18 @@ namespace WinFormsApp1
                 }
 
                 button3.Text = "Switch to Light  Mode";
-                isDarkMode = true; 
+                isDarkMode = true;
             }
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_2(object sender, EventArgs e)
+        {
+
         }
     }
 }
