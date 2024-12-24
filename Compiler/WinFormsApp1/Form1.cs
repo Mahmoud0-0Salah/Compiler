@@ -61,7 +61,8 @@ namespace WinFormsApp1
             input = Regex.Replace(input, $@"{TokensDefinitions[14].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[15].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[16].Item2}", match => $" {match.Value} ");
-            input = Regex.Replace(input, $@"{TokensDefinitions[21].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[17].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[18].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[22].Item2}", match => $" {match.Value} ");
             string[] result = Regex.Split(input, @"\s+");
 
