@@ -35,10 +35,10 @@ namespace WinFormsApp1
             ("else_stmt", @"^(اخر)$"),
             ("if_stmt", @"^(اذا)$"),
             ("return", @"^(ارجع)$"),
-            ("IN", @"في"),
+            ("IN", @"^(في)$"),
             ("ID", @"(^[\u0600-\u06FF_][\w]*$)|(^[A-Za-z_][\w]*$)"),
             ("NUM", @"^(\d+)$"),
-            ("SEMICOLON", @";"), //10
+            ("SEMICOLON", @";"), //11
             ("(", @"\("),
             (")", @"\)"),
             ("{", @"{"),
@@ -61,6 +61,8 @@ namespace WinFormsApp1
             input = Regex.Replace(input, $@"{TokensDefinitions[14].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[15].Item2}", match => $" {match.Value} ");
             input = Regex.Replace(input, $@"{TokensDefinitions[16].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[21].Item2}", match => $" {match.Value} ");
+            input = Regex.Replace(input, $@"{TokensDefinitions[22].Item2}", match => $" {match.Value} ");
             string[] result = Regex.Split(input, @"\s+");
 
             tokens = new List<Token>();

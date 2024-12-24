@@ -61,6 +61,10 @@ namespace WinFormsApp1
             {
                 errors.Add($"Error: Expected {expectedType} but found {foundToken}");
             }
+            else
+            {
+                errors.Add("Error: Invalid syntax");
+            }
         }
 
         public (List<string> Errors, List<string> RulesCalled) Parse()
