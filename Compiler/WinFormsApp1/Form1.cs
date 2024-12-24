@@ -69,16 +69,22 @@ namespace WinFormsApp1
 
             foreach (string s in result)
             {
+                bool found = false;
+                if (s == "")
+                    continue;
                 foreach (var tokenDef in TokensDefinitions)
                 {
                     if (Regex.IsMatch(s, tokenDef.Item2))
                     {
+                        found = true;
                         tokens.Add(new Token { Type = tokenDef.Item1, Value = s });
                         if (Scan)
                             textBox1.AppendText($"{s} => {tokenDef.Item1}{Environment.NewLine}");
                         break;
                     }
                 }
+                if (!found)
+                    tokens.Add(new Token { Type = "Unknown", Value = s });
             }
         }
         private void button1_Click(object sender, EventArgs e)
