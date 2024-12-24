@@ -61,10 +61,6 @@ namespace WinFormsApp1
             {
                 errors.Add($"Error: Expected {expectedType} but found {foundToken}");
             }
-            else
-            {
-                errors.Add("Error: Invalid syntax");
-            }
         }
 
         public (List<string> Errors, List<string> RulesCalled) Parse()
@@ -83,7 +79,12 @@ namespace WinFormsApp1
         {
             while (!currentToken.IsToken("EOF"))
             {
-                if (currentToken.IsToken("DATATYPE"))
+                if (currentToken.IsToken("Unknown"))
+                {
+                    errors.Add("Error : Unknown token");
+                    Consume();
+                }
+                else if (currentToken.IsToken("DATATYPE"))
                     TrackFunction(Declaration, nameof(Declaration));
                 else if (currentToken.IsToken("LOOP"))
                     TrackFunction(Loop, nameof(Loop));
@@ -197,7 +198,10 @@ namespace WinFormsApp1
         {
             Match("PRINT");
             Match("(");
-            Match("ID");
+            if (currentToken.IsToken("ID"))
+                Match("ID");
+            else
+                Match("NUM");
             Match(")");
             Match("SEMICOLON");
         }
@@ -218,24 +222,7 @@ namespace WinFormsApp1
         private void AssignToVar()
         {
             // س = ص + س + س( ش ) + ش ;
-            while (true)
-            {
-                Exp();
-
-                if (currentToken.IsToken("SEMICOLON"))
-                    return;
-
-                Match("(");
-                Params(true);
-                Match(")");
-
-                if (currentToken.IsToken("MATHOP"))
-                    Match("MATHOP");
-                else if (currentToken.IsToken("BITSOP"))
-                    Match("BITSOP");
-                else
-                    return;
-            }
+            Exp();
         }
 
         private void VarDeclaration()
@@ -244,15 +231,17 @@ namespace WinFormsApp1
             {
                 Match("ASSIGNOP");
                 AssignToVar();
-
+                Match("SEMICOLON");
             }
             else if (currentToken.IsToken("["))
             {
                 Match("[");
                 Match("NUM");
                 Match("]");
+                Match("SEMICOLON");
             }
-            Match("SEMICOLON");
+            else
+                Match("ASSIGNOP");
         }
 
         private void FunDeclaration()
@@ -288,10 +277,8 @@ namespace WinFormsApp1
                 else if (currentToken.IsToken("COMMA"))
                     Match("COMMA");
                 else
-                {
-                    Match(")");
                     break;
-                }
+                
             }
         }
         private void Exp()
@@ -300,7 +287,15 @@ namespace WinFormsApp1
             while (true)
             {
                 if (currentToken.IsToken("ID"))
+                {
                     Match("ID");
+                    if (currentToken.IsToken("("))
+                    {
+                        Match("(");
+                        Params(true);
+                        Match(")");
+                    }
+                }
                 else
                     Match("NUM");
 
