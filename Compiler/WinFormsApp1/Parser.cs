@@ -124,6 +124,7 @@ namespace WinFormsApp1
                 else 
                 {
                     VarDeclaration();
+                    Match("SEMICOLON");
                 }
             }
             else
@@ -235,17 +236,13 @@ namespace WinFormsApp1
             {
                 Match("ASSIGNOP");
                 AssignToVar();
-                Match("SEMICOLON");
             }
             else if (currentToken.IsToken("["))
             {
                 Match("[");
                 Match("NUM");
                 Match("]");
-                Match("SEMICOLON");
             }
-            else
-                Match("ASSIGNOP");
         }
 
         private void FunDeclaration()
