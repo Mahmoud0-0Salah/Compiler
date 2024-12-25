@@ -17,6 +17,8 @@ namespace ParserTest
         [InlineData("متغير x = 10; \r\nطالما(x < 10) { \r\nx = x + 2; \r\n}", "Parser Output:\r\nParsing successful! Rules called:\r\nDeclaration\r\nLoop\r\nAssign\r\n")]
         [InlineData("// تعريف الدالة\r\n\r\nصحيح دالة (صحيح س) \r\n{\r\n  // لوب من 2 الي قيمة س\r\n\r\n  من ( صحيح ص في ( ٢ الي س / 2 ) ) \r\n  {\r\n      اذا ( س % ص == 0 ) \r\n      {\r\n        // ارجع صفر لو الرقم غير اولي\r\n\r\n          ارجع 0 ;\r\n      }\r\n\r\n      // ارجع واحد لو الرقم اولي\r\n\r\n      ارجع 1 ;\r\n  }\r\n}  \r\n\r\nصحيح س = 13 ;\r\n\r\nصحيح اولي  = دالة ( س ) ;\r\n\r\nاولي  = دالة ( ١٢  ) ;\r\n\r\n// نطبع القيمة الراجعة من الدالة\r\n\r\nاطبع (  اولي) ;\r\n"
             , "Parser Output:\r\nParsing successful! Rules called:\r\nDeclaration\r\nLoop\r\nConditionStmt\r\nFunc_Return\r\nFunc_Return\r\nDeclaration\r\nDeclaration\r\nAssign\r\nPrint\r\n")]
+        [InlineData("// تعريف الدالة\r\n\r\nصحيح دالة (صحيح س , صحيح ع) \r\n{\r\n   صحيح ص = 1 ;\r\n   صحيح ناتج = 0 ;  \r\n  // لوب من 1 الي قيمة ع\r\n  طالما ( ص <=  س) \r\n  {\r\n      اذا ( ص % ع == 0 ) \r\n      {\r\n              ناتج = ناتج + ص ;\r\n      }\r\n      ص = ص + 1 ;\r\n  }\r\n      // ارجع الناتج\r\n\r\n      ارجع ناتج  ;\r\n}  \r\n\r\nصحيح س = 13 ;\r\n\r\nصحيح مجموع = دالة ( س  , 3) ;\r\n\r\n// نطبع القيمة الراجعة من الدالة\r\n\r\nاطبع (  مجموع ) ;"
+            , "Parser Output:\r\nParsing successful! Rules called:\r\nDeclaration\r\nDeclaration\r\nDeclaration\r\nLoop\r\nConditionStmt\r\nAssign\r\nAssign\r\nFunc_Return\r\nDeclaration\r\nDeclaration\r\nPrint\r\n")]
         public void Test1(string input,string exp)
         {
             var form = new Form1();
