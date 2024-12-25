@@ -33,9 +33,9 @@ dotnet restore
 
 ## Screenshots:
 ![image](https://github.com/user-attachments/assets/0fa709a2-f127-4f9a-b5d4-94617eb14092)
-![image](https://github.com/user-attachments/assets/720af3ed-859e-4641-bc48-00826baecb41)
-![image](https://github.com/user-attachments/assets/cf75379e-69d5-4e5f-9fb1-db5f673946da)
-![image](https://github.com/user-attachments/assets/c802d5bc-57bf-43fd-80e5-faf355f437bc)
+![image](https://github.com/user-attachments/assets/b0651b67-9fcd-4966-9186-a4466f03316f)
+![image](https://github.com/user-attachments/assets/3f13b370-72db-45c7-8490-ea686860c328)
+![image](https://github.com/user-attachments/assets/b2239aa1-5b34-4b5f-bc2a-bec26bf3b1bd)
 
 
 
