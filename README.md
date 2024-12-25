@@ -7,7 +7,7 @@ An Arabic-language compiler designed to parse and execute programs written in Ar
 - **Arabic Syntax Parsing**: Supports Arabic keywords for variable declarations, loops, conditionals, and function calls.
 - **Flexible Parser**: The parser is designed with extendable rules, enabling easy addition of new syntax features.
 - **Error Handling**: Detailed error messages for syntax errors during parsing.
-- **GUI Integration**: A simple graphical user interface (GUI) for users to interact with the compiler and view the results.
+- **GUI Integration**: A simple graphical user interface (GUI) for users to interact with the compiler and view the results, with support for both dark and light modes.
 - **Unit Testing**: Uses xUnit for easy unit testing and modular addition of new functionality.
 
 ## Prerequisites:
