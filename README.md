@@ -1,6 +1,6 @@
 # Arabic Compiler
 
-An Arabic-language compiler designed to parse and execute programs written in Arabic syntax. This project aims to create a compiler that can understand Arabic keywords, variables, and control structures like loops and conditionals, tailored for Arabic-speaking developers.
+An Arabic-language compiler designed to parse programs written in Arabic syntax. This project aims to create a compiler that can understand Arabic keywords, variables, and control structures like loops and conditionals, tailored for Arabic-speaking developers.
 
 ## Features
 
